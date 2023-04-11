@@ -1,0 +1,121 @@
+button{
+    display: block;
+    margin: auto;
+    cursor: pointer;
+    padding: 11px 8px;
+    background-color: #eb0000;
+    border: 1px solid #eb0000;
+    border-bottom: 4px solid #d20606;
+    border-radius: 6px;
+    font: normal bold 20px Arial, Helvetica, sans-serif;
+    color: #FFF;
+    outline: none;
+    -webkit-appearance: none;
+    width: 20%;/**/
+}
+
+#start{
+    width: 30%;
+}
+section{
+    display: none; 
+    flex-wrap: wrap;
+    position: relative;
+    justify-content: center;
+}
+
+#choixJoueur, #choixDifficulté{
+    display: flex;
+    margin-bottom: 8%;
+}
+#choixDifficulté button, #choixJoueur button{
+    background-color: white ;
+    color: black !important;
+}
+.aqua{
+    background-color: aqua !important;
+}
+header{
+    padding: 8%;
+}
+
+.front, .back{
+    width: 150px;
+    height: 160px;
+    backface-visibility: hidden;
+    /*position: absolute;*/
+}
+
+.front img{
+    width: 150px;
+    height: 160px;
+}
+
+.front{
+    transition: all 1s ease-out;
+    transform: rotateY(180deg);
+    border: solid yellow;
+    position: absolute;
+
+}
+.back{
+    background-color: #d20606;
+    transition: all 1s ease-out;
+    border: solid blue;
+}
+.card{
+    margin-right: 7%;
+    margin-bottom: 1%;
+    transform-style: preserve-3d;
+    transition: all 1s ease-out;
+}
+
+#scoreJ1{
+    width: 1%;
+    margin-right: 4%;
+}
+
+#scoreJ2{
+    width: 1%;
+    margin-left: 4%;
+}
+
+
+.cardhover{
+    transform: rotateY(180deg);
+}
+.back:hover{
+    /*transform: rotateY(180deg);*/
+    background-color: aqua !important;
+}
+.front:hover{
+    /*transform: rotateY(180deg);*/
+}
+
+
+
+
+@media screen and (max-width: 1300px){
+    
+    .front, .back{
+        width: 150px;
+        height: 150px;
+    }
+    .front img{
+        width: 150px;
+        height: 150px;
+    }
+    
+    .card{
+        margin-right: 4%;
+        margin-bottom: 4%;
+    }
+
+    #scoreJ1{
+        margin-right: 3%;
+    }
+    #scoreJ2{
+        margin-left: 0%;
+        margin-right: 3%;
+    }
+}
