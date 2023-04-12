@@ -129,21 +129,29 @@ function choiceCard(){
    this.classList.add('cardhover')
    listReturn.push(this)
    if (listReturn.length == 2){
-    setTimeout(()=>{
-        test()
-    }, 1500)
+    test()
    }
 }
 
 function test(){
     if (listReturn[0].children[0].children[0].src == listReturn[1].children[0].children[0].src){
+        setTimeout(()=>{
+            listReturn[0].children[0].style.opacity = 0
+            listReturn[1].children[0].style.opacity = 0
+            listReturn.pop()
+            listReturn.pop()
+        }, 1500)
+
         listReturn[0].style.visibility = 'hidden'
         listReturn[1].style.visibility = 'hidden'
+
     }else{
-        window.navigator.vibrate([100,30,100,30,100,30,200,30,200,30,200,30,100,30,100,30,100])
-        listReturn[0].classList.remove('cardhover')
-        listReturn[1].classList.remove('cardhover')
+        setTimeout(()=>{
+            window.navigator.vibrate([100,30,100,30,100,30,200,30,200,30,200,30,100,30,100,30,100])
+            listReturn[0].classList.remove('cardhover')
+            listReturn[1].classList.remove('cardhover')
+            listReturn.pop()
+            listReturn.pop()
+        }, 1500)
     }
-    listReturn.pop()
-    listReturn.pop()
 }
