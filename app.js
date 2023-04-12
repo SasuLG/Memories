@@ -41,25 +41,30 @@ document.addEventListener('keydown', e=>{
 })
 
 var NBCARDS = 10
-var images = ["light.jpg", "hawks.jpg", "shoto.jpg", "ken2.jpg", "arima.jpg", "kiyotaka.png", "783546.png", "destiny.jpg", "violet.png", "detective.jpg"]
-
+var timer = 1500
+var images = []
 
 function Start(){
+    images = ["light.jpg", "hawks.jpg", "shoto.jpg", "ken2.jpg", "arima.jpg", "kiyotaka.png", "783546.png", "destiny.jpg", "violet.png", "detective.jpg"]
+
     section.style.display = 'flex'
      header.style.display = 'none'
      if (choiceDifficulte[0].className == 'difficulte aqua'){
         NBCARDS = 8
+        images.pop()
+        images.pop()
     }else if (choiceDifficulte[1].className == 'difficulte aqua'){
         NBCARDS = 10
     }else{
         NBCARDS = 10
-        //time ou autre
+        timer = 500
     }
     if (choiceJoueur[0].className == 'joueur aqua'){
         console.log('oui')
     }else{
         console.log('non')
     }
+    images = [...images, ...images]
     build()
 
 
@@ -78,7 +83,11 @@ function build(){
         card.appendChild(front)
         card.appendChild(back)
         var img = document.createElement('img')
-        img.src = "images/"+images[Math.floor(i/2)] 
+
+        var random = Math.floor(Math.random() * images.length)
+        img.src = "images/"+images[random] 
+        images.splice(random, 1)
+
         front.appendChild(img)
         cards.push(card)
         if (i ==4){
@@ -106,41 +115,29 @@ function addcard(){
 
 
 var listReturn = []
+var GO = true
+
 function choiceCard(){
-    /*
-    var nb = 0
-    var bool = false
-    cards.forEach(e=>{
-        if (e.className == 'card cardhover'){
-            nb++
-        }
-        if (nb >= 2){
-            bool = true
-        }
-    })
-    if(bool){
-        cards.forEach(e=>{
-            e.classList.remove('cardhover')
-        })
-    }else{
+    if (GO && this.className != 'card cardhover'){
         this.classList.add('cardhover')
+        listReturn.push(this)
+        if (listReturn.length == 2){
+         test()
+        }
     }
-    */
-   this.classList.add('cardhover')
-   listReturn.push(this)
-   if (listReturn.length == 2){
-    test()
-   }
+
 }
 
 function test(){
+    GO = false
     if (listReturn[0].children[0].children[0].src == listReturn[1].children[0].children[0].src){
         setTimeout(()=>{
             listReturn[0].children[0].style.opacity = 0
             listReturn[1].children[0].style.opacity = 0
             listReturn.pop()
             listReturn.pop()
-        }, 1500)
+            GO = true
+        }, timer)
 
         listReturn[0].style.visibility = 'hidden'
         listReturn[1].style.visibility = 'hidden'
@@ -152,6 +149,7 @@ function test(){
             listReturn[1].classList.remove('cardhover')
             listReturn.pop()
             listReturn.pop()
-        }, 1500)
+            GO = true
+        }, timer)
     }
 }
