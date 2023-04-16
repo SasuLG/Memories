@@ -1,3 +1,8 @@
+article{
+    display: none;
+    justify-content: space-around;
+}
+
 button{
     display: block;
     margin: auto;
@@ -41,14 +46,14 @@ header{
 
 .front, .back{
     width: 150px;
-    height: 160px;
+    height: 150px;
     backface-visibility: hidden;
     /*position: absolute;*/
 }
 
 .front img{
     width: 150px;
-    height: 160px;
+    height: 150px;
 }
 
 .front{
@@ -70,6 +75,7 @@ header{
     transition: all 1s ease-out;
 }
 
+/*
 #scoreJ1{
     width: 1%;
     margin-right: 4%;
@@ -79,7 +85,7 @@ header{
     width: 1%;
     margin-left: 4%;
 }
-
+*/
 
 .cardhover{
     transform: rotateY(180deg);
@@ -117,5 +123,20 @@ header{
     #scoreJ2{
         margin-left: 0%;
         margin-right: 3%;
+    }
+}
+
+@media screen and (max-width: 1300px){
+    #choixJoueur, #choixDifficulté{
+        margin-bottom: 10%;
+    }
+    #choixDifficulté{
+        flex-wrap: wrap;
+    }
+    button{
+        width: 40%;
+    }
+    #start{
+        width: 60% !important;
     }
 }

@@ -1,10 +1,14 @@
 var header = document.querySelector('header')
 var start = document.querySelector('#start')
+var article = document.querySelector('article')
 var section = document.querySelector('section')
 var choiceJoueur = document.querySelectorAll('#choixJoueur button')
 var choiceDifficulte = document.querySelectorAll('#choixDifficulté button')
 
-
+var temps = 0
+var time = document.querySelector('#timeValue')
+var nbCoups = 0
+var coups = document.querySelector('#coupsValue')
 choiceJoueur[0].classList.add('aqua')
 choiceDifficulte[0].classList.add('aqua')
 
@@ -40,13 +44,22 @@ document.addEventListener('keydown', e=>{
     }
 })
 
+var NBJ = 1
 var NBCARDS = 10
 var timer = 1500
 var images = []
+var joueur1Joue = true
+
+var scoreJ1 = document.querySelector('#scoreJ1Value')
+var scoreJ1Value = 0
+var scoreJ2 = document.querySelector('#scoreJ2Value')
+var scoreJ2Value = 0
+
 
 function Start(){
     images = ["light.jpg", "hawks.jpg", "shoto.jpg", "ken2.jpg", "arima.jpg", "kiyotaka.png", "783546.png", "destiny.jpg", "violet.png", "detective.jpg"]
 
+    article.style.display = 'flex'
     section.style.display = 'flex'
      header.style.display = 'none'
      if (choiceDifficulte[0].className == 'difficulte aqua'){
@@ -61,11 +74,13 @@ function Start(){
     }
     if (choiceJoueur[0].className == 'joueur aqua'){
         console.log('oui')
+        NBJ = 1
     }else{
-        console.log('non')
+        NBJ = 2
     }
     images = [...images, ...images]
     build()
+    changeTime()
 
 
 }
@@ -90,17 +105,8 @@ function build(){
 
         front.appendChild(img)
         cards.push(card)
-        if (i ==4){
-            var score = document.createElement('div')
-            score.id = 'scoreJ2'
-            section.appendChild(score)
-            var p = document.createElement('p')
-            p.innerHTML = 'score J2'
-            score.appendChild(p)
-            var p2 = document.createElement('p')
-            p2.innerHTML = '0'
-            score.appendChild(p2)
-        }
+        coups.innerHTML = nbCoups
+        time.innerHTML = temps
     }
     addcard()
 }
@@ -123,6 +129,7 @@ function choiceCard(){
         listReturn.push(this)
         if (listReturn.length == 2){
          test()
+         joueur1Joue = !joueur1Joue
         }
     }
 
@@ -130,13 +137,30 @@ function choiceCard(){
 
 function test(){
     GO = false
+    nbCoups++
+    if (nbCoups >= 20){
+        coups.style.color = 'red'
+    }
+    coups.innerHTML = nbCoups
     if (listReturn[0].children[0].children[0].src == listReturn[1].children[0].children[0].src){
         setTimeout(()=>{
             listReturn[0].children[0].style.opacity = 0
             listReturn[1].children[0].style.opacity = 0
             listReturn.pop()
             listReturn.pop()
-            GO = true
+            NBCARDS--
+            if (joueur1Joue){
+                scoreJ1Value ++
+                scoreJ1.innerHTML = scoreJ1Value
+            }else{
+                scoreJ2Value ++
+                scoreJ2.innerHTML = scoreJ2Value
+            }
+            if (NBCARDS == 0){
+                afficheFin()
+            }else{
+                GO = true
+            }
         }, timer)
 
         listReturn[0].style.visibility = 'hidden'
@@ -144,7 +168,8 @@ function test(){
 
     }else{
         setTimeout(()=>{
-            window.navigator.vibrate([100,30,100,30,100,30,200,30,200,30,200,30,100,30,100,30,100])
+            //window.navigator.vibrate([100,30,100,30,100,30,200,30,200,30,200,30,100,30,100,30,100])
+            window.navigator.vibrate(400)
             listReturn[0].classList.remove('cardhover')
             listReturn[1].classList.remove('cardhover')
             listReturn.pop()
@@ -152,4 +177,21 @@ function test(){
             GO = true
         }, timer)
     }
+}
+
+
+function changeTime(){
+    var intervalTime = setInterval(()=>{
+        temps++
+        time.innerHTML = temps
+        if (temps >= 100){
+            time.style.color = 'red'
+        }
+    }, 1000)
+
+}
+
+function afficheFin(){
+    clearInterval(intervalTime)
+    alert('oui')
 }
