@@ -109,12 +109,16 @@ function build(){
         time.innerHTML = temps
     }
     addcard()
+    setTimeout(()=>{
+        alert('en cas de mauvaise conenxion, les images ne chargeront pas correctement. (un peu difficile sans les images)')
+
+    },10)
 }
 
 function addcard(){
     cards.forEach(e=>{
         e.addEventListener('click', choiceCard)
-    
+
     })
 }
 
@@ -149,6 +153,7 @@ function test(){
             listReturn.pop()
             listReturn.pop()
             NBCARDS--
+            joueur1Joue = !joueur1Joue
             if (joueur1Joue){
                 scoreJ1Value ++
                 scoreJ1.innerHTML = scoreJ1Value
@@ -193,5 +198,16 @@ function changeTime(){
 
 function afficheFin(){
     clearInterval(intervalTime)
-    alert('oui')
+    if (scoreJ1Value > scoreJ2Value){
+        alert('Joueur 1 gagne')
+    }else if (scoreJ1Value < scoreJ2Value){
+        alert('Joueur 2 gagne')
+    }else{
+        alert('Egalite')
+    }
+    reset()
+}
+
+function reset(){
+    
 }
