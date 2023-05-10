@@ -64,9 +64,15 @@ header{
 
 }
 .back{
-    background-color: #d20606;
+    /*background-color: #d20606;*/
+    background: linear-gradient(#003973, #E5E5BE);
+    background: linear-gradient(to top, lime, 20%, cyan);
+    background: linear-gradient( #C6FFDD, #FBD786, #f7797d);
+    background: linear-gradient(to right,  #12c2e9, #c471ed, #f7797d);
+    background: linear-gradient(-70deg, red,white, orange);
+    /*background: linear-gradient(70deg, blue,white, red);*/
     transition: all 1s ease-out;
-    border: solid blue;
+    border: 1px solid blue;
 }
 .card{
     margin-right: 7%;

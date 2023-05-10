@@ -13,6 +13,7 @@ choiceJoueur[0].classList.add('aqua')
 choiceDifficulte[0].classList.add('aqua')
 
 var isbuild = false
+var intervalTime
 
 choiceJoueur.forEach(e=>{
     e.addEventListener('click', choice)
@@ -152,7 +153,8 @@ function test(){
             listReturn[1].children[0].style.opacity = 0
             listReturn.pop()
             listReturn.pop()
-            NBCARDS--
+            //NBCARDS--
+            NBCARDS = 0
             joueur1Joue = !joueur1Joue
             if (joueur1Joue){
                 scoreJ1Value ++
@@ -162,6 +164,7 @@ function test(){
                 scoreJ2.innerHTML = scoreJ2Value
             }
             if (NBCARDS == 0){
+                console.log('ui')
                 afficheFin()
             }else{
                 GO = true
@@ -186,7 +189,7 @@ function test(){
 
 
 function changeTime(){
-    var intervalTime = setInterval(()=>{
+    intervalTime = setInterval(()=>{
         temps++
         time.innerHTML = temps
         if (temps >= 100){
