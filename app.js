@@ -153,8 +153,7 @@ function test(){
             listReturn[1].children[0].style.opacity = 0
             listReturn.pop()
             listReturn.pop()
-            //NBCARDS--
-            NBCARDS = 0
+            NBCARDS--
             joueur1Joue = !joueur1Joue
             if (joueur1Joue){
                 scoreJ1Value ++
